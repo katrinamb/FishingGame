@@ -1,6 +1,6 @@
 import java.util.Scanner;
-
 import java.util.Random;
+
 public class playFishing {
     static Rare rareFish[] = {
         new Rare("Rare", "Coelacanth", 6.5, 500, 90),
