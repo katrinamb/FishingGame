@@ -2,14 +2,14 @@ import java.util.Scanner;
 
 import java.util.Random;
 public class playFishing {
-    Rare rareFish[] = {
+    static Rare rareFish[] = {
         new Rare("Rare", "Coelacanth", 6.5, 500, 90),
         new Rare("Rare", "Blue Marlin", 12, 550, 93),
         new Rare("Rare", "Bluefin Tuna", 13, 600, 95),
         new Rare("Rare", "Yellowfin Tuna", 7, 525, 91),
         new Rare("Rare", "Dorado", 4, 485, 87)
     };
-    Common commonFish[] = {
+    static Common commonFish[] = {
         new Common("Common","Trout", 1.2, 50, 45),
         new Common("Common","Bass", 1.4, 55, 50),
         new Common("Common","Gold Fish", 0.2, 5, 5),
@@ -18,7 +18,7 @@ public class playFishing {
         new Common("Common","Tuna", 3, 100, 45)
     };
     
-    Uncommon uncommonFish[] = {
+    static Uncommon uncommonFish[] = {
         new Uncommon("Uncommon", "Clown Fish", 0.3, 350, 35),
         new Uncommon("Uncommon", "Garibaldi", 1, 400, 60),
         new Uncommon("Uncommon", "Koi Fish", 2.5, 200, 20),
@@ -53,6 +53,7 @@ public class playFishing {
                         System.out.println("Awesome, let's get that line out there!");
                         System.out.println("*casts line*");
                         String rarity = rarity();
+                        //might have to do ifs and else statements when selecting a fish
                         Fish fish = pickFish(rarity);
                             
                     }
