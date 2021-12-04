@@ -1,10 +1,8 @@
-package FishingGame;
-
 public class Common extends Fish {
-    public Common(String rarity, String name, float size, int value, int strength) {
-        super(rarity, name, size, value);
-        this.strenght = strenght;
-    }
+  public int strength;
+  public Common(String rarity, String name,double size, int value, int strength) {
+      super(rarity, name, size, value, strength);
+  }
 
     public void stealBait(){
      //   if (this.size * 10 - "rodstat" > 20){

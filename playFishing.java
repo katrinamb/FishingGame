@@ -1,8 +1,8 @@
-package FishingGame;
 import java.util.Scanner;
+
 import java.util.Random;
 public class playFishing {
-    static Rare rareFish[] = {
+    Rare rareFish[] = {
         new Rare("Rare", "Coelacanth", 6.5, 500, 90),
         new Rare("Rare", "Blue Marlin", 12, 550, 93),
         new Rare("Rare", "Bluefin Tuna", 13, 600, 95),

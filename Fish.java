@@ -1,16 +1,17 @@
-package FishingGame;
 import java.util.Random;
 
-public class Fish{
+public abstract class Fish extends Object{
     private String rarity;
     private String name;
-    private float size;
+    private double size;
     private int value;
-    public Fish(String rarity, String name, float size, int value) {
+    public int strength;
+    public Fish(String rarity, String name, double size, int value, int strength) {
         this.rarity = rarity;
         this.name = name;
         this.size = size;
         this.value = value;
+        this.strength = strength;
     }
     public String getRarity() {
         return rarity;
@@ -24,10 +25,10 @@ public class Fish{
     public void setName(String name) {
         this.name = name;
     }
-    public float getSize() {
+    public double getSize() {
         return size;
     }
-    public void setSize(float size) {
+    public void setSize(double size) {
         this.size = size;
     }
     public int getValue() {
@@ -35,6 +36,12 @@ public class Fish{
     }
     public void setValue(int value) {
         this.value = value;
+    }
+    public int getStrength() {
+        return strength;
+    }
+    public void setStregnth(int strength) {
+        this.strength = strength;
     }
 
     public int fight(){
