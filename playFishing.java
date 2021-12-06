@@ -1,7 +1,9 @@
 import java.util.Scanner;
 import java.util.Random;
 
+
 public class playFishing {
+    private static final Scanner scan = new Scanner(System.in);
     static Rare rareFish[] = {
         new Rare("Rare", "Coelacanth", 6.5, 500, 90),
         new Rare("Rare", "Blue Marlin", 12, 550, 93),
@@ -27,34 +29,30 @@ public class playFishing {
     
     };
     public static void main(String[] args){
-        
-        boolean playing = true;
-               
-
-        while (playing){
-            System.out.println("Hi, Welcom to the fishing game!");
-            String userChoice = menu();
-            if (userChoice == "1"){ //go fishing
-                String option = fishingMenu();
-                boolean invalid = true;
-                while (invalid){
-                    if (option == "1"){ //apply bait
+        int choice;
+        while(true){
+            System.out.println("Hi, Welcome to the fishing game!");
+            choice = menu();
+            if (choice == 1){ //go fishing
+                while (true){
+                    choice = fishingMenu();
+                    if (choice == 1){ //apply bait
                         System.out.println("Good choice of bait!");
-                        invalid = true;
+                        break;
                     }
 
-                    else if (option == "2"){ //select rod
+                    else if (choice == 2){ //select rod
                         System.out.println("good choice of rod!");
-                        invalid = true;
+                        break;
                     }
 
-                    else if (option =="3"){ //cast
-                        invalid = false;
+                    else if (choice == 3){ //cast
                         System.out.println("Awesome, let's get that line out there!");
                         System.out.println("*casts line*");
                         String rarity = rarity();
                         //might have to do ifs and else statements when selecting a fish
                         Fish fish = pickFish(rarity);
+                        break;
                             
                     }
                     else{ //invalid option
@@ -63,38 +61,36 @@ public class playFishing {
                 }
             }   
             
-            else if (userChoice == "2"){ //go to inventory
-
+            else if (choice == 2){ //go to inventory
+                break;
             }
 
-            else if (userChoice == "3"){ //exit
-                playing = false;
+            else if (choice == 3){ //exit
+                break;
             }
 
             else{ //invalid choice
                 System.out.println("Invalid choice. Try again.");
             }
         }
+        scan.close();
     }
 
-    public static String menu(){
+    public static int menu(){
+    
         System.out.println("Select what you would like to do. (Enter 1, 2, or 3)");
         System.out.println("1. Go Fishing");
         System.out.println("2. Go to inventory");
         System.out.println("3. Exit game");
-        Scanner scan = new Scanner(System.in);
-        String choice = scan.nextLine();
-        return choice;
+        return scan.nextInt();
     }
 
-    public static String fishingMenu(){
+    public static int fishingMenu(){
         System.out.println("Select an option (Enter 1, 2, or 3)");
         System.out.println("1. Apply bait");
         System.out.println("2. Select rod");
         System.out.println("3. Leave it alone");
-        Scanner scan = new Scanner(System.in);
-        String choice = scan.nextLine();
-        return choice;
+        return scan.nextInt();
     }
 
     public static String rarity(){
