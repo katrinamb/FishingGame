@@ -5,13 +5,13 @@ public class Common extends Fish {
   }
 
     public void stealBait(){
-     //   if (this.size * 10 - "rodstat" > 20){
-       //     System.out.println("Oh no, the fish stole your bait!");
-        //}
+      //if (this.size * 10 - "rodstat" > 20){
+        System.out.println("Oh no, the fish stole your bait!");
+      //}
 
-        //else{
-          //  continue;
-        //}
+      //else{
+      //continue;
+      //}
 
     }
 }

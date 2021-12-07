@@ -30,8 +30,8 @@ public class playFishing {
     };
     public static void main(String[] args){
         int choice;
-        while(true){
-            System.out.println("Hi, Welcome to the fishing game!");
+        System.out.println("Hi, Welcome to the fishing game!");
+        while(true){  
             choice = menu();
             if (choice == 1){ //go fishing
                 while (true){
@@ -122,5 +122,11 @@ public class playFishing {
         else{
             return commonFish[fishNum];
         }
+    }
+    public static void castRod(){
+        System.out.println("Awesome, let's get that line out there!");
+        System.out.println("*casts line*");
+        String rarity = rarity();
+        Fish fish = pickFish(rarity);
     }
 }
