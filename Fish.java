@@ -5,7 +5,7 @@ public abstract class Fish extends Object{
     private String name;
     private double size;
     private int value;
-    public int strength;
+    private int strength;
     public Fish(String rarity, String name, double size, int value, int strength) {
         this.rarity = rarity;
         this.name = name;

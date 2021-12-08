@@ -26,7 +26,6 @@ public class playFishing {
         new Uncommon("Uncommon", "Koi Fish", 2.5, 200, 20),
         new Uncommon("Uncommon", "Cherry Salmon", 1.5, 250, 30),
         new Uncommon("Uncommon", "Puffer Fish", 2, 450, 65)
-    
     };
     public static void main(String[] args){
         int choice;
@@ -77,7 +76,6 @@ public class playFishing {
     }
 
     public static int menu(){
-    
         System.out.println("Select what you would like to do. (Enter 1, 2, or 3)");
         System.out.println("1. Go Fishing");
         System.out.println("2. Go to inventory");
@@ -102,7 +100,6 @@ public class playFishing {
         else if (fishRarity <90){
             return "Uncommon";
         }
-
         else{
             return "Rare";
         }
