@@ -1,9 +1,10 @@
 import java.util.Scanner;
 import java.util.Random;
 
-
+// the runner program
 public class playFishing {
     private static final Scanner scan = new Scanner(System.in);
+    // rare fish list
     static Rare rareFish[] = {
         new Rare("Rare", "Coelacanth", 6.5, 500, 90),
         new Rare("Rare", "Blue Marlin", 12, 550, 93),
@@ -11,6 +12,7 @@ public class playFishing {
         new Rare("Rare", "Yellowfin Tuna", 7, 525, 91),
         new Rare("Rare", "Dorado", 4, 485, 87)
     };
+    // common fish list
     static Common commonFish[] = {
         new Common("Common","Trout", 1.2, 50, 45),
         new Common("Common","Bass", 1.4, 55, 50),
@@ -20,13 +22,17 @@ public class playFishing {
         new Common("Common","Tuna", 3, 100, 45)
     };
     
+    // uncommon fish list
     static Uncommon uncommonFish[] = {
         new Uncommon("Uncommon", "Clown Fish", 0.3, 350, 35),
         new Uncommon("Uncommon", "Garibaldi", 1, 400, 60),
         new Uncommon("Uncommon", "Koi Fish", 2.5, 200, 20),
         new Uncommon("Uncommon", "Cherry Salmon", 1.5, 250, 30),
         new Uncommon("Uncommon", "Puffer Fish", 2, 450, 65)
+    
     };
+
+    // main
     public static void main(String[] args){
         int choice;
         System.out.println("Hi, Welcome to the fishing game!");
@@ -76,6 +82,7 @@ public class playFishing {
     }
 
     public static int menu(){
+    
         System.out.println("Select what you would like to do. (Enter 1, 2, or 3)");
         System.out.println("1. Go Fishing");
         System.out.println("2. Go to inventory");
@@ -100,11 +107,13 @@ public class playFishing {
         else if (fishRarity <90){
             return "Uncommon";
         }
+
         else{
             return "Rare";
         }
     }
 
+    // picks the fish that the player will have to try to fish
     public static Fish pickFish(String rarity){
         Random gen = new Random();
         int fishNum = gen.nextInt(4);
@@ -120,6 +129,8 @@ public class playFishing {
             return commonFish[fishNum];
         }
     }
+
+    // casts the rod of the player
     public static void castRod(){
         System.out.println("Awesome, let's get that line out there!");
         System.out.println("*casts line*");
