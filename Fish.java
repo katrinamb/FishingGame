@@ -1,5 +1,4 @@
-import java.util.Random;
-
+import java.lang.Math;
 public abstract class Fish extends Object{
     private String rarity;
     private String name;
@@ -44,17 +43,14 @@ public abstract class Fish extends Object{
         this.strength = strength;
     }
 
-    public int fight(){
-        Random gen = new Random();
-        int fishFight = gen.nextInt(100);
-      //  if (fishFight - "rodstat" > 5){
-        //    System.out.println("The fish is fighting harder!");
-          //  return 1;
-       // } 
-        //else{
-          //  return 0;
-        //}
-        return 5;
+    public int fight(int chanceStat){
+        if (Math.abs(chanceStat - this.strength) < 10){
+            System.out.println("The fish is fighting harder!");
+            return 1;  //add to amount of questions
+        } 
+        else{
+            return 0; //don't add
+        }
     }
 
     
