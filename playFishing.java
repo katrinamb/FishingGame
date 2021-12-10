@@ -57,7 +57,7 @@ public class playFishing {
                         String rarity = rarity();
                         //might have to do ifs and else statements when selecting a fish
                         Fish fish = pickFish(rarity);
-                        break;
+                        
                             
                     }
                     else{ //invalid option
@@ -94,7 +94,7 @@ public class playFishing {
         System.out.println("Select an option (Enter 1, 2, or 3)");
         System.out.println("1. Apply bait");
         System.out.println("2. Select rod");
-        System.out.println("3. Leave it alone");
+        System.out.println("3. Cast");
         return scan.nextInt();
     }
 
@@ -136,5 +136,13 @@ public class playFishing {
         System.out.println("*casts line*");
         String rarity = rarity();
         Fish fish = pickFish(rarity);
+    }
+
+    public static int actionMenu(){
+        System.out.println("Select an option (Enter 1, 2, or 3)");
+        System.out.println("1. Reel in");
+        System.out.println("2. Tug on line");
+        System.out.println("3. Leave it alone");
+        return scan.nextInt();
     }
 }
