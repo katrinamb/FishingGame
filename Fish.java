@@ -45,13 +45,21 @@ public abstract class Fish extends Object{
 
     public int fight(int chanceStat){
         if (Math.abs(chanceStat - this.strength) < 10){
-            System.out.println("The fish is fighting harder!");
-            return 1;  //add to amount of questions
+            System.out.println("The fish is fighting harder and not slowing down!");
+            return 1;  //dont decrease fish strength
         } 
         else{
-            return 0; //don't add
+            System.out.println("The fish is fighting hard but losing steam");
+            return 0; //decrease fish strength
         }
     }
+    
+    public String toString() {
+        return "Fish [name=" + name + ", rarity=" + rarity + ", size=" + size + ", strength=" + strength + ", value="
+                + value + "]";
+    }
+
+    
 
     
 }

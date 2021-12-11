@@ -13,6 +13,7 @@ public class Rare extends Uncommon{
             return 1; //the rod breaks in main
         }
         else{
+            System.out.println("Woah the fish almost snapped your line there, be careful!");
             return 0;//the rod does not break in main
         }
     }

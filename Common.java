@@ -15,6 +15,7 @@ public class Common extends Fish {
       }
 
       else{
+        System.out.println("Wow this fish is really nibbling at your bait!");
         return 0; //keep bait in main
       }
 
