@@ -31,10 +31,29 @@ public class playFishing {
         new Uncommon("Uncommon", "Puffer Fish", 2, 450, 74)
     
     };
+    // rods list
+    public Rod[] rods = {
+        new Rod("Surf Rod", 100, 60, 85),
+        new Rod("Spinning Rod", 150, 70, 90),
+        new Rod("Fly Rod", 250, 75, 95),
+        new Rod("Ice Rod", 400, 80, 100),
+        new Rod("Telescopic Rod", 500, 90, 115)
+    };
+    // baits list
+    public Bait[] baits = {
+        new Bait("Wacky Worm", 50, 10),
+        new Bait("Honeycomb Spoon", 75, 20),
+        new Bait("Glittering Spinner", 100, 35),
+        new Bait("Suspending Crankbait", 125, 45),
+        new Bait("Rooster Tail", 150, 60)
+    };
 
     // main
     public static void main(String[] args){
         playFishing call = new playFishing();
+        Store store = new Store();
+        Rod starter = new Rod("Starter Rod", 0, 50, 55);
+        store.myRods.add(starter);
         int choice;
       
         System.out.println("Hi, Welcome to the fishing game!");
@@ -42,7 +61,7 @@ public class playFishing {
             choice = menu();
             if (choice == 1){ //go fishing
                 System.out.println("You currently have your starter rod selected");
-                Rod selectedRod = Rod.myRods[0];
+                Rod selectedRod = store.getRod(0);
                 boolean casted = true;
                 while (casted){
                     choice = fishingMenu();
@@ -53,7 +72,7 @@ public class playFishing {
                     }
 
                     else if (choice == 2){ //change rod
-                        System.out.println("good choice of rod!");
+                        System.out.println("Good choice of rod!");
                         break;
                     }
 
@@ -82,7 +101,23 @@ public class playFishing {
             }   
             
             else if (choice == 2){ //go to inventory
-                break;
+                choice = inventoryMenu();
+                Boolean invalid = true;
+                while(invalid){
+                    if(choice == 1){ //view inventory
+                        System.out.println("----Your Inventory----");
+                        System.out.println("Coins: " + store.getCoins() + "\nRods: " + store.myRods.toArray() + "\nBaits: " + store.myBaits.toArray()); 
+                        invalid = false;
+                    }
+                    else if(choice == 2){ //go to store
+                        System.out.println("Being Impletented Soon!");
+                        invalid = false;
+                    }
+                    else{ //invalid option
+                        System.out.println("Invalid option. Try again.");
+                    } 
+                }  
+
             }
 
             else if (choice == 3){ //exit
@@ -95,24 +130,31 @@ public class playFishing {
         }
         scan.close();
     }
-
+    //the menu displayed before the user starts fishing
     public static int menu(){
     
-        System.out.println("Select what you would like to do. (Enter 1, 2, or 3)");
+        System.out.println("\nSelect what you would like to do. (Enter 1, 2, or 3)");
         System.out.println("1. Go Fishing");
-        System.out.println("2. Go to inventory");
-        System.out.println("3. Exit game");
+        System.out.println("2. Go to Inventory");
+        System.out.println("3. Exit Game");
         return scan.nextInt();
     }
-
+    //the menu displayed after "Go Fishing" is selected
     public static int fishingMenu(){
-        System.out.println("Select an option (Enter 1, 2, or 3)");
-        System.out.println("1. Apply bait");
-        System.out.println("2. Select rod");
+        System.out.println("\nSelect an option (Enter 1, 2, or 3)");
+        System.out.println("1. Apply Bait");
+        System.out.println("2. Select Rod");
         System.out.println("3. Cast");
         return scan.nextInt();
     }
-
+    // the invetory menu 
+    public static int inventoryMenu(){
+        System.out.println("\nSelect what you would like to do. (Enter 1 or 2)");
+        System.out.println("1. View Inventory");
+        System.out.println("2. View Store");
+        return scan.nextInt();
+    }
+    //randomly decide the rarity of the fish 
     public static String rarity(){
         Random gen = new Random();
         int fishRarity = gen.nextInt(100);
@@ -153,14 +195,17 @@ public class playFishing {
         //Fish fish = pickFish(rarity);
     //}
 
+    //the menu displayed while the user is fishing
     public static int actionMenu(){
         System.out.println("Select an option (Enter 1, 2, or 3)");
-        System.out.println("1. Reel in");
-        System.out.println("2. Tug on line");
-        System.out.println("3. Leave it alone");
+        System.out.println("1. Reel In");
+        System.out.println("2. Tug On Line");
+        System.out.println("3. Leave It Alone");
         return scan.nextInt();
     }
 
+    //computes the result after the action the user chooses to do
+    //returns true to continue fishing, returns false to end fishing
     public boolean resultAction(int action, Object fishObject, String rarity, Object selectedRod){
         Fish fish = (Fish) fishObject;
         Rod rod = (Rod) selectedRod;

@@ -2,6 +2,7 @@ public class Bait extends Object{
     private String name;
     private int price;
     private int effect;
+
     public Bait(String name, int price, int effect) {
         this.name = name;
         this.price = price;

@@ -3,7 +3,7 @@ public class Rod extends Object{
     private int price;
     private int durability;
     private int chanceStat;
-    public static Rod myRods[]={new Rod("starter rod", 0, 50, 55)};
+
     public Rod(String name,int price, int durability,int chanceStat) {
         this.name = name;
         this.price = price;
