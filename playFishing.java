@@ -101,9 +101,9 @@ public class playFishing {
             }   
             
             else if (choice == 2){ //go to inventory
-                choice = inventoryMenu();
                 Boolean invalid = true;
                 while(invalid){
+                    choice = inventoryMenu();
                     if(choice == 1){ //view inventory
                         System.out.println("----Your Inventory----");
                         System.out.println("Coins: " + store.getCoins() + "\nRods: " + store.myRods.toArray() + "\nBaits: " + store.myBaits.toArray()); 
