@@ -1,10 +1,10 @@
 public class Store extends Object{
-    private int coins;
+    private int coins=150;
     // go back and add items to the arrays; I think we should add the objects in
     // the playFishing, but just put the names here in these arrays
     public String[] rods;
     public String[] baits;
-
+    
     int getCoins(){
         return coins;
     }

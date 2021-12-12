@@ -8,7 +8,7 @@ public class Rare extends Uncommon{
     public int calculateBreak(int durability){
         Random gen = new Random();
         int breakChance = gen.nextInt(10);
-        if (breakChance + strength > durability){
+        if (breakChance/10 * strength > durability){
             System.out.println("Oh snap! Your line...snapped.");
             return 1; //the rod breaks in main
         }
