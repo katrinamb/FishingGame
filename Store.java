@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 public class Store extends Object{
     private int coins = 150;
     //public String[] rods = new String[]{"Surf Rod", "Spinning Rod", "Fly Rod", "Ice Rod", "Telescopic Rod"};
@@ -87,5 +88,12 @@ public class Store extends Object{
         for(int i = 0; i < baits.length; i++){
             System.out.println(baits[i].getName()+ ": "+ baits[i].getPrice() + " coins");
         }
+    }
+    public static void choice(){
+        Scanner scan = new Scanner(System.in);
+        //While(true){// continue choice
+
+        //}
+
     }
 }
