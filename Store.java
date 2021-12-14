@@ -84,11 +84,12 @@ public class Store extends Object{
 
     //Displays all the baits of the rods in the store
     public static void baitToString(){
-        System.out.println("----Rods----");
+        System.out.println("----Baits----");
         for(int i = 0; i < baits.length; i++){
             System.out.println(baits[i].getName()+ ": "+ baits[i].getPrice() + " coins");
         }
     }
+
     public static void choice(){
         Scanner scan = new Scanner(System.in);
         //While(true){// continue choice

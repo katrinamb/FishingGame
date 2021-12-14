@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import java.util.Random;
-
 // the runner program
 public class playFishing {
     private static final Scanner scan = new Scanner(System.in);
