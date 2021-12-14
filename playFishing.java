@@ -53,30 +53,33 @@ public class playFishing {
         playFishing call = new playFishing();
         Store store = new Store();
         Rod starter = new Rod("Starter Rod", 0, 50, 55);
-        store.myRods.add(starter);
+        Store.myRods.add(starter);
         int choice;
       
         System.out.println("Hi, Welcome to the fishing game!");
         while(true){  
             choice = menu();
             if (choice == 1){ //go fishing
+                System.out.println();
                 System.out.println("You currently have your starter rod selected");
                 Rod selectedRod = store.getRod(0);
                 boolean casted = true;
                 while (casted){
                     choice = fishingMenu();
-                    
                     if (choice == 1){ //apply bait
+                        System.out.println();
                         System.out.println("Good choice of bait!");
                         break;
                     }
 
                     else if (choice == 2){ //change rod
+                        System.out.println();
                         System.out.println("Good choice of rod!");
                         break;
                     }
 
                     else if (choice == 3){ //cast
+                        System.out.println();
                         System.out.println("Awesome, let's get that line out there!");
                         System.out.println("*casts line*");
                         String rarity = rarity();
@@ -95,6 +98,7 @@ public class playFishing {
                             
                     }
                     else{ //invalid option
+                        System.out.println();
                         System.out.println("Invalid option. Try again.");
                     }
                 }
@@ -105,15 +109,18 @@ public class playFishing {
                 while(invalid){
                     choice = inventoryMenu();
                     if(choice == 1){ //view inventory
+                        System.out.println();
                         System.out.println("----Your Inventory----");
                         System.out.println("Coins: " + store.getCoins() + "\nRods: " + store.myRods.toArray() + "\nBaits: " + store.myBaits.toArray()); 
                         invalid = false;
                     }
                     else if(choice == 2){ //go to store
-                        System.out.println("Being Impletented Soon!");
+                        System.out.println();
+                        storeMenu();
                         invalid = false;
                     }
                     else{ //invalid option
+                        System.out.println();
                         System.out.println("Invalid option. Try again.");
                     } 
                 }  
@@ -125,6 +132,7 @@ public class playFishing {
             }
 
             else{ //invalid choice
+                System.out.println();
                 System.out.println("Invalid choice. Try again.");
             }
         }
@@ -154,6 +162,15 @@ public class playFishing {
         System.out.println("2. View Store");
         return scan.nextInt();
     }
+
+    //the store menu
+    public static void storeMenu(){
+        System.out.println("Welcome to the Store!");
+        Store.rodToString();
+        System.out.println();
+        Store.baitToString();
+    }
+
     //randomly decide the rarity of the fish 
     public static String rarity(){
         Random gen = new Random();

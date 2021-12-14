@@ -6,7 +6,7 @@ public class Store extends Object{
     public static ArrayList<Rod> myRods = new ArrayList<Rod>();
     public static ArrayList<Bait> myBaits = new ArrayList<Bait>();
     // rods list
-    public Rod[] rods = {
+    public static Rod[] rods = {
         new Rod("Surf Rod", 100, 60, 85),
         new Rod("Spinning Rod", 150, 70, 90),
         new Rod("Fly Rod", 250, 75, 95),
@@ -14,7 +14,7 @@ public class Store extends Object{
         new Rod("Telescopic Rod", 500, 90, 115)
     };
     // baits list
-    public Bait[] baits = {
+    public static Bait[] baits = {
         new Bait("Wacky Worm", 50, 10),
         new Bait("Honeycomb Spoon", 75, 20),
         new Bait("Glittering Spinner", 100, 35),
@@ -71,5 +71,21 @@ public class Store extends Object{
         else{
             System.out.println("You do not have enough coins to purchase this item.");
         }    
+    }
+
+    //Displays all the names of the rods in the store
+    public static void rodToString(){
+        System.out.println("----Rods----");
+        for(int i = 0; i < rods.length; i++){
+            System.out.println(rods[i].getName()+ ": "+ rods[i].getPrice() + " coins");
+        }
+    }
+
+    //Displays all the baits of the rods in the store
+    public static void baitToString(){
+        System.out.println("----Rods----");
+        for(int i = 0; i < baits.length; i++){
+            System.out.println(baits[i].getName()+ ": "+ baits[i].getPrice() + " coins");
+        }
     }
 }
