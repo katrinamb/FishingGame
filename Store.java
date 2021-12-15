@@ -160,6 +160,5 @@ public class Store extends Object{
         else{ //invalid choice
             System.out.println("Invalid choice. Try again.");
         }
-        scan.close();
     }
 }

@@ -124,6 +124,7 @@ public class playFishing {
                         System.out.println();
                         Store.storeMenu();
                         Store.choice();
+                        invalid = false;
                     }
                     else{ //invalid option
                         System.out.println();
