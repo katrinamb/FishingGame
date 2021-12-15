@@ -58,7 +58,7 @@ public abstract class Fish extends Object{
     }
     
     public String toString() {
-        return "Fish name=" + name + ", rarity=" + rarity + ", size=" + size + ", strength=" + strength + ", value="
+        return "Fish name: " + name + " Rarity: " + rarity + " Size: " + size + " Value: "
                 + value;
     }
 
