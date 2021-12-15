@@ -110,7 +110,14 @@ public class playFishing {
                     if(choice == 1){ //view inventory
                         System.out.println();
                         System.out.println("----Your Inventory----");
-                        System.out.println("Coins: " + store.getCoins() + "\nRods: " + store.myRods.toArray() + "\nBaits: " + store.myBaits.toArray()); 
+                        System.out.println("Coins: " + store.getCoins() + "\nRods: ");
+                        for (int i = 0; i < store.myRods.size(); i++){
+                            System.out.println(store.myRods.get(i).getName());
+                        }
+                        System.out.println("\nBaits: ");
+                        for (int i = 0; i < store.myBaits.size(); i++){
+                            System.out.println(store.myBaits.get(i).getName());
+                        }
                         invalid = false;
                     }
                     else if(choice == 2){ //go to store
