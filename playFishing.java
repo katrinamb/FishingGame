@@ -106,61 +106,24 @@ public class playFishing {
             else if (choice == 2){ //go to inventory
                 Boolean invalid = true;
                 while(invalid){
-                    choice = inventoryMenu();
+                    choice = Store.inventoryMenu();
                     if(choice == 1){ //view inventory
                         System.out.println();
                         System.out.println("----Your Inventory----");
-                        System.out.println("Coins: " + store.getCoins() + "\nRods: ");
-                        for (int i = 0; i < store.myRods.size(); i++){
-                            System.out.println(store.myRods.get(i).getName());
+                        System.out.println("Coins: " + Store.getCoins() + "\nRods: ");
+                        for (int i = 0; i < Store.myRods.size(); i++){
+                            System.out.println(Store.myRods.get(i).getName());
                         }
                         System.out.println("\nBaits: ");
-                        for (int i = 0; i < store.myBaits.size(); i++){
-                            System.out.println(store.myBaits.get(i).getName());
+                        for (int i = 0; i < Store.myBaits.size(); i++){
+                            System.out.println(Store.myBaits.get(i).getName());
                         }
                         invalid = false;
                     }
                     else if(choice == 2){ //go to store
                         System.out.println();
-                        storeMenu();
-                        int num = buyMenu();
-                        if(num == 1){
-                            store.buyRod(rods[0]);
-                        }
-                        else if(num==2){
-                            store.buyRod(rods[1]);
-                        }
-                        else if(num==3){
-                            store.buyRod(rods[2]);
-                        }
-                        else if(num==4){
-                            store.buyRod(rods[3]);
-                        }
-                        else if(num==5){
-                            store.buyRod(rods[4]);
-                        }
-                        else if(num==6){
-                            store.buyBait(baits[0]);
-                        }
-                        else if(num==7){
-                            store.buyBait(baits[1]);
-                        }
-                        else if(num==8){
-                            store.buyBait(baits[2]);
-                        }
-                        else if(num==9){
-                            store.buyBait(baits[3]);
-                        }
-                        else if(num==10){
-                            store.buyBait(baits[4]);
-                        }
-                        else if(num==11){
-                            break; //exit
-                        }
-                        else{ //invalid choice
-                            System.out.println("Invalid choice. Try again.");
-                        }
-                        invalid = false;
+                        Store.storeMenu();
+                        Store.choice();
                     }
                     else{ //invalid option
                         System.out.println();
@@ -183,7 +146,6 @@ public class playFishing {
     }
     //the menu displayed before the user starts fishing
     public static int menu(){
-    
         System.out.println("\nSelect what you would like to do. (Enter 1, 2, or 3)");
         System.out.println("1. Go Fishing");
         System.out.println("2. Go to Inventory");
@@ -196,37 +158,6 @@ public class playFishing {
         System.out.println("1. Apply Bait");
         System.out.println("2. Select Rod");
         System.out.println("3. Cast");
-        return scan.nextInt();
-    }
-    // the invetory menu 
-    public static int inventoryMenu(){
-        System.out.println("\nSelect what you would like to do. (Enter 1 or 2)");
-        System.out.println("1. View Inventory");
-        System.out.println("2. View Store");
-        return scan.nextInt();
-    }
-
-    //the store menu
-    public static void storeMenu(){
-        System.out.println("\nWelcome to the Store!");
-        Store.rodToString();
-        System.out.println();
-        Store.baitToString();
-    }
-
-    public static int buyMenu(){
-        System.out.println("\nWhat would you like to buy? (Enter the corresponding number)");
-        System.out.println("1. Surf Rod");
-        System.out.println("2. Spinning Rod");
-        System.out.println("3. Fly Rod");
-        System.out.println("4. Ice Rod");
-        System.out.println("5. Telescopic Rod");
-        System.out.println("6. Wacky Worm");
-        System.out.println("7. Honeycomb Spoon");
-        System.out.println("8. Glittering Spinner");
-        System.out.println("9. Suspending Crankbait");
-        System.out.println("10. Rooster Tail");
-        System.out.println("11. Exit");
         return scan.nextInt();
     }
 
