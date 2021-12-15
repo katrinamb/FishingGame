@@ -162,19 +162,65 @@ public class Store extends Object{
         }
     }
 
+    //get users input to return the bait the user selects, it also removes the bait from myBait
     public static Bait baitSelection(){
-        while (true){
+        while (true){  
+            if(myBaits.size() != 0){
+                System.out.println();
+                System.out.println("Player 1's Bait: ");
+                for(int i = 0; i < myBaits.size(); i++){
+                    System.out.println(myBaits.get(i).getName() + " [Select: "+ i + "]");
+                }
+            }
+            else{
+                System.out.println();
+                System.out.println("No bait available to equip.");
+            }
+            System.out.println();
+            System.out.println("Select an option:");
             int choice = scan.nextInt();
             if (choice <= myBaits.size()){ //apply bait
+                Bait selectedBait = myBaits.get(choice);
                 System.out.println();
-                System.out.println("Good choice of bait!");
-                Bait selectedBait = myBaits[choice];
-                break;
+                System.out.println(selectedBait.getName()+", good choice of bait!");
+                myBaits.remove(choice);
+                return selectedBait;
             }
             else{
                 System.out.println();
                 System.out.println("Invalid Choice.");
             }
-        return selectedBait;
-    }
+        }
+    } 
+
+    //get users input to return the bait the user selects, it also removes the bait from myBait
+    public static Rod selectedRod(){
+        while (true){  
+            if(myRods.size() != 0){
+                System.out.println();
+                System.out.println("Player 1's Rods: ");
+                for(int i = 0; i < myRods.size(); i++){
+                    System.out.println(myRods.get(i).getName() + " [Select: "+ i + "]");
+                }
+            }
+            else{
+                System.out.println();
+                System.out.println("No Rod available to equip.");
+            }
+            System.out.println();
+            System.out.println("Select an option:");
+            int choice = scan.nextInt();
+            if (choice <= myRods.size()){ //apply bait
+                Rod selectedRod = myRods.get(choice);
+                System.out.println();
+                System.out.println(selectedRod+" equiped.");
+                myRods.remove(choice);
+                return selectedRod;
+            }
+            else{
+                System.out.println();
+                System.out.println("Invalid Choice.");
+            }
+        }
+    } 
 }

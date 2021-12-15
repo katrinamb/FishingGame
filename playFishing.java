@@ -68,14 +68,13 @@ public class playFishing {
                     choice = fishingMenu();
                     if (choice == 1){ //apply bait
                         System.out.println();
-                        System.out.println("Good choice of bait!");
                         selectedBait = Store.baitSelection();
                         break;
                     }
 
                     else if (choice == 2){ //change rod
                         System.out.println();
-                        System.out.println("Good choice of rod!");
+                        selectedRod = Store.selectedRod();
                         break;
                     }
 
