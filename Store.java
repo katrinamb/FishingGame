@@ -161,4 +161,20 @@ public class Store extends Object{
             System.out.println("Invalid choice. Try again.");
         }
     }
+
+    public static Bait baitSelection(){
+        while (true){
+            int choice = scan.nextInt();
+            if (choice <= myBaits.length()){ //apply bait
+                System.out.println();
+                System.out.println("Good choice of bait!");
+                selectedBait = myBaits[choice];
+                break;
+            }
+            else{
+                System.out.println();
+                System.out.println("Invalid Choice.");
+            }
+        return selectedBait;
+    }
 }

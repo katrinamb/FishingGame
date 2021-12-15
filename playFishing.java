@@ -40,11 +40,11 @@ public class playFishing {
     };
     // baits list
     static Bait[] baits = {
-        new Bait("Wacky Worm", 50, 10),
-        new Bait("Honeycomb Spoon", 75, 20),
-        new Bait("Glittering Spinner", 100, 35),
-        new Bait("Suspending Crankbait", 125, 45),
-        new Bait("Rooster Tail", 150, 60)
+        new Bait("Wacky Worm", 50, 5),
+        new Bait("Honeycomb Spoon", 75, 10),
+        new Bait("Glittering Spinner", 100, 15),
+        new Bait("Suspending Crankbait", 125, 20),
+        new Bait("Rooster Tail", 150, 25)
     };
 
     // main
@@ -53,6 +53,8 @@ public class playFishing {
         Store store = new Store();
         Rod starter = new Rod("Starter Rod", 0, 50, 55);
         Store.myRods.add(starter);
+        Rod selectedRod = store.getRod(0);
+        Bait selectedBait = null;
         int choice;
       
         System.out.println("Hi, Welcome to the fishing game!");
@@ -61,13 +63,13 @@ public class playFishing {
             if (choice == 1){ //go fishing
                 System.out.println();
                 System.out.println("You currently have your starter rod selected");
-                Rod selectedRod = store.getRod(0);
                 boolean casted = true;
                 while (casted){
                     choice = fishingMenu();
                     if (choice == 1){ //apply bait
                         System.out.println();
                         System.out.println("Good choice of bait!");
+                        selectedBait = Store.baitSelection();
                         break;
                     }
 
@@ -89,7 +91,7 @@ public class playFishing {
                         
                         while(fishing){
                             int action = actionMenu();
-                            fishing = call.resultAction(action, fish, rarity, selectedRod);
+                            fishing = call.resultAction(action, fish, rarity, selectedRod, selectedBait);
                             System.out.println("The fish's current strength:"+ fish.getStrength());
                         }
                         fish.setStrength(ogStrength);
@@ -214,14 +216,19 @@ public class playFishing {
 
     //computes the result after the action the user chooses to do
     //returns true to continue fishing, returns false to end fishing
-    public boolean resultAction(int action, Object fishObject, String rarity, Object selectedRod){
+    public boolean resultAction(int action, Object fishObject, String rarity, Object selectedRod, Bait selctedBait){
         Fish fish = (Fish) fishObject;
         Rod rod = (Rod) selectedRod;
         if (action == 1){ //reel in
             //Random gen = new Random();
             //int reelChance = gen.nextInt(100);  //replace with chance stat when implemented
-            if (rod.getChanceStat()>fish.getStrength()){//(Math.abs(reelChance - fish.getStrength()) > 40){
+            if (rod.getChanceStat()+ selctedBait.getEffect()>fish.getStrength()){//(Math.abs(reelChance - fish.getStrength()) > 40){
                 //catch
+                System.out.println("Great job, you just caught a real lunker!");
+                System.out.println(fish.toString());
+                return false;
+            }
+            else if (rod.getChanceStat()>fish.getStrength()){
                 System.out.println("Great job, you just caught a real lunker!");
                 System.out.println(fish.toString());
                 return false;
