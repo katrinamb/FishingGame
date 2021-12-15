@@ -46,7 +46,7 @@ public class playFishing {
         new Bait("Suspending Crankbait", 125, 20),
         new Bait("Rooster Tail", 150, 25)
     };
-
+    static Bait selectedBait = null;
     // main
     public static void main(String[] args){
         playFishing call = new playFishing();
@@ -54,7 +54,6 @@ public class playFishing {
         Rod starter = new Rod("Starter Rod", 0, 50, 55);
         Store.myRods.add(starter);
         Rod selectedRod = store.getRod(0);
-        Bait selectedBait = null;
         int choice;
       
         System.out.println("Hi, Welcome to the fishing game!");
@@ -276,6 +275,7 @@ public class playFishing {
             else if (fishAction == 1){ //steal bait method
                 int baitStolen = fish.stealBait(selectedRod.getChanceStat());
                 if (baitStolen == 1){
+                    selectedBait = 0;
                     //remove bait and fish gets away
                 }
                 //else{ //fish fighting hard but should still lose a little strength
