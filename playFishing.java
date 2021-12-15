@@ -86,7 +86,8 @@ public class playFishing {
                         String rarity = rarity();
                         //might have to do ifs and else statements when selecting a fish
                         Fish fish = pickFish(rarity); 
-                        int ogStrength = fish.getStrength();         
+                        int ogStrength = fish.getStrength(); 
+                        setOgStrength(ogStrength);        
                         boolean fishing = true;
                         
                         while(fishing){
@@ -213,6 +214,10 @@ public class playFishing {
         System.out.println("3. Leave It Alone");
         return scan.nextInt();
     }
+    static int ogFishStrength;
+    public static void setOgStrength(int ogStrength){
+        ogFishStrength = ogStrength;
+    }
 
     //computes the result after the action the user chooses to do
     //returns true to continue fishing, returns false to end fishing
@@ -230,7 +235,7 @@ public class playFishing {
             }
             else if (rod.getChanceStat()>fish.getStrength()){
                 System.out.println("Great job, you just caught a real lunker!");
-                System.out.println(fish.toString());
+                System.out.println(fish.toString() + " Strength: " + ogFishStrength);
                 return false;
             }
             else{

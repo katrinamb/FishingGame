@@ -165,10 +165,10 @@ public class Store extends Object{
     public static Bait baitSelection(){
         while (true){
             int choice = scan.nextInt();
-            if (choice <= myBaits.length()){ //apply bait
+            if (choice <= myBaits.size()){ //apply bait
                 System.out.println();
                 System.out.println("Good choice of bait!");
-                selectedBait = myBaits[choice];
+                Bait selectedBait = myBaits[choice];
                 break;
             }
             else{
