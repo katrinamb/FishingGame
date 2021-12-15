@@ -44,30 +44,30 @@ public class Store extends Object{
         this.coins -= coins;
     }
     //does the process of buying a rod, so subtracts money and adds rod to inventory
-    void buyRod(String rodName, int rodCost){
-        if(getCoins() >= rodCost){
+    void buyRod(Rod rod){
+        if(getCoins() >= rod.getPrice()){
             for (int i = 0; i < rods.length; i++){
-                if(rods[i].getName() == rodName){
+                if(rods[i].getName() == rod.getName()){
                     System.out.println("Nice choice! Added to your inventory.");
                     myRods.add(rods[i]);
                 }
             }
-            subCoins(rodCost);
+            subCoins(rod.getPrice());
         }
         else{
             System.out.println("You do not have enough coins to purchase this item.");
         } 
     }
     //does the process of buying bait, so subtracts money and adds bait to inventory
-    void buyBait(String baitName, int baitCost){
-        if(getCoins() >= baitCost){
+    void buyBait(Bait bait){
+        if(getCoins() >= bait.getPrice()){
             for (int i = 0; i < baits.length; i++){
-                if(baits[i].getName() == baitName){
+                if(baits[i].getName() == bait.getName()){
                     System.out.println("Nice choice! Added to your inventory.");
                     myBaits.add(baits[i]);
                 }
             }
-            subCoins(baitCost);
+            subCoins(bait.getPrice());
         }
         else{
             System.out.println("You do not have enough coins to purchase this item.");

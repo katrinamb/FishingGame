@@ -31,7 +31,7 @@ public class playFishing {
     
     };
     // rods list
-    public Rod[] rods = {
+    static Rod[] rods = {
         new Rod("Surf Rod", 100, 60, 85),
         new Rod("Spinning Rod", 150, 70, 90),
         new Rod("Fly Rod", 250, 75, 95),
@@ -39,7 +39,7 @@ public class playFishing {
         new Rod("Telescopic Rod", 500, 90, 115)
     };
     // baits list
-    public Bait[] baits = {
+    static Bait[] baits = {
         new Bait("Wacky Worm", 50, 10),
         new Bait("Honeycomb Spoon", 75, 20),
         new Bait("Glittering Spinner", 100, 35),
@@ -116,6 +116,43 @@ public class playFishing {
                     else if(choice == 2){ //go to store
                         System.out.println();
                         storeMenu();
+                        int num = buyMenu();
+                        if(num == 1){
+                            store.buyRod(rods[0]);
+                        }
+                        else if(num==2){
+                            store.buyRod(rods[1]);
+                        }
+                        else if(num==3){
+                            store.buyRod(rods[2]);
+                        }
+                        else if(num==4){
+                            store.buyRod(rods[3]);
+                        }
+                        else if(num==5){
+                            store.buyRod(rods[4]);
+                        }
+                        else if(num==6){
+                            store.buyBait(baits[0]);
+                        }
+                        else if(num==7){
+                            store.buyBait(baits[1]);
+                        }
+                        else if(num==8){
+                            store.buyBait(baits[2]);
+                        }
+                        else if(num==9){
+                            store.buyBait(baits[3]);
+                        }
+                        else if(num==10){
+                            store.buyBait(baits[4]);
+                        }
+                        else if(num==11){
+                            break; //exit
+                        }
+                        else{ //invalid choice
+                            System.out.println("Invalid choice. Try again.");
+                        }
                         invalid = false;
                     }
                     else{ //invalid option
@@ -164,10 +201,26 @@ public class playFishing {
 
     //the store menu
     public static void storeMenu(){
-        System.out.println("Welcome to the Store!");
+        System.out.println("\nWelcome to the Store!");
         Store.rodToString();
         System.out.println();
         Store.baitToString();
+    }
+
+    public static int buyMenu(){
+        System.out.println("\nWhat would you like to buy? (Enter the corresponding number)");
+        System.out.println("1. Surf Rod");
+        System.out.println("2. Spinning Rod");
+        System.out.println("3. Fly Rod");
+        System.out.println("4. Ice Rod");
+        System.out.println("5. Telescopic Rod");
+        System.out.println("6. Wacky Worm");
+        System.out.println("7. Honeycomb Spoon");
+        System.out.println("8. Glittering Spinner");
+        System.out.println("9. Suspending Crankbait");
+        System.out.println("10. Rooster Tail");
+        System.out.println("11. Exit");
+        return scan.nextInt();
     }
 
     //randomly decide the rarity of the fish 
