@@ -46,14 +46,18 @@ public class playFishing {
         new Bait("Suspending Crankbait", 125, 20),
         new Bait("Rooster Tail", 150, 25)
     };
-    static Bait selectedBait = null;
+    
     // main
     public static void main(String[] args){
         playFishing call = new playFishing();
-        Store store = new Store();
+        //Store store = new Store();
         Rod starter = new Rod("Starter Rod", 0, 50, 55);
+        Bait starterBait = new Bait("Hook", 0, 0);
+        Store.myBaits.add(starterBait);
         Store.myRods.add(starter);
-        Rod selectedRod = store.getRod(0);
+        Rod selectedRod = starter;
+        Bait selectedBait = starterBait;
+
         int choice;
       
         System.out.println("Hi, Welcome to the fishing game!");
@@ -61,7 +65,7 @@ public class playFishing {
             choice = menu();
             if (choice == 1){ //go fishing
                 System.out.println();
-                System.out.println("You currently have your starter rod selected");
+                System.out.println("You currently have " + selectedRod.getName() + " applied and " + selectedBait.getName() + " applied");
                 boolean casted = true;
                 while (casted){
                     choice = fishingMenu();
@@ -94,6 +98,8 @@ public class playFishing {
                             System.out.println("The fish's current strength:"+ fish.getStrength());
                         }
                         fish.setStrength(ogStrength);
+                        selectedBait = starterBait;
+                        selectedRod = starter;
                         casted = false;
                             
                     }
@@ -219,46 +225,50 @@ public class playFishing {
 
     //computes the result after the action the user chooses to do
     //returns true to continue fishing, returns false to end fishing
-    public boolean resultAction(int action, Object fishObject, String rarity, Object selectedRod, Bait selctedBait){
+    public boolean resultAction(int action, Object fishObject, String rarity, Object selectedRod, Object bait){
         Fish fish = (Fish) fishObject;
         Rod rod = (Rod) selectedRod;
+        Bait selectedBait = (Bait) bait;
         if (action == 1){ //reel in
             //Random gen = new Random();
             //int reelChance = gen.nextInt(100);  //replace with chance stat when implemented
-            if (rod.getChanceStat()+ selctedBait.getEffect()>fish.getStrength()){//(Math.abs(reelChance - fish.getStrength()) > 40){
+            if (rod.getChanceStat()+ selectedBait.getEffect()>fish.getStrength()){//(Math.abs(reelChance - fish.getStrength()) > 40){
                 //catch
                 System.out.println("Great job, you just caught a real lunker!");
                 System.out.println(fish.toString());
+                Store.addCoins(fish.getValue());
                 return false;
             }
-            else if (rod.getChanceStat()>fish.getStrength()){
-                System.out.println("Great job, you just caught a real lunker!");
-                System.out.println(fish.toString() + " Strength: " + ogFishStrength);
-                return false;
-            }
+           // else if (rod.getChanceStat()>fish.getStrength()){
+             //   System.out.println("Great job, you just caught a real lunker!");
+               // System.out.println(fish.toString() + " Strength: " + ogFishStrength);
+              //  Store.addCoins(fish.getValue());
+               // return false;
+            //}
             else{
                 System.out.println("Oh no reeling didn't work, the fish is still too strong!");
-                reelAction(rarity, fish, selectedRod);
-                return true;
+                boolean fishing = reelAction(rarity, fish, selectedRod, selectedBait);
+                return fishing;
             }       
         }
 
         else if (action == 2){ //tug on line
             System.out.println("Great idea to tug on the line and tire the fish out!");
-            tugAction(rarity, fish, selectedRod);
-            return true;
+            boolean fishing = tugAction(rarity, fish, selectedRod, selectedBait);
+            return fishing;
         }
 
         else if (action ==3){ //leave it alone
             System.out.println("Interesting idea to leave it alone, let's see if that works!");
-            reelAction(rarity, fish, selectedRod);
-            return true;
+            boolean fishing = reelAction(rarity, fish, selectedRod, selectedBait);
+            return fishing;
         }
-        return false;
+        return true;
     }
 
-    public void reelAction(String rarity, Object fishObject, Object rod){
+    public boolean reelAction(String rarity, Object fishObject, Object rod, Object bait){
         Rod selectedRod = (Rod) rod;
+        Bait selectedBait = (Bait) bait;
         if (rarity == "Rare"){
             Rare fish = (Rare) fishObject;
             Random gen = new Random();
@@ -267,6 +277,7 @@ public class playFishing {
                 int strengthEffect = fish.fight(selectedRod.getChanceStat()); //10 is placeholder for rod stat
                 if (strengthEffect == 0){ //fish getting tired
                     fish.setStrength(fish.getStrength()-5);
+                    return true;
                 }
                 //else{ //fish fighting hard but should still lose a little strength
                   //  fish.setStrength(fish.getStrength()-5);
@@ -275,7 +286,12 @@ public class playFishing {
             else if (fishAction == 1){ //steal bait method
                 int baitStolen = fish.stealBait(selectedRod.getChanceStat());
                 if (baitStolen == 1){
-                    selectedBait = 0;
+                    Store.myBaits.remove(selectedBait);
+                    if (Store.myBaits.size() == 0){
+                        Store.myBaits.add(new Bait("Hook", 0, 0));
+                    }
+                    return false;
+                    //selectedBait = 0;
                     //remove bait and fish gets away
                 }
                 //else{ //fish fighting hard but should still lose a little strength
@@ -286,6 +302,7 @@ public class playFishing {
             else if (fishAction == 2){ //escape method
                 int escaped = fish.escape(selectedRod.getChanceStat());
                 if (escaped == 1){  //may need to change fishing variable in while loop to global to effect
+                    return false;
                     //fish got away
                 }
                // else{ //fish fighting hard but should still lose a little strength
@@ -297,6 +314,11 @@ public class playFishing {
                 int rodBreak = fish.calculateBreak(selectedRod.getDurability()); //85 placeholder for durability
                 if (rodBreak == 1){
                     //break rod and fish gets away
+                    Store.myRods.remove(selectedRod);
+                    if (Store.myRods.size() == 0){
+                        Store.myRods.add(new Rod("Starter Rod", 0, 50, 55));
+                    }
+                    return false;
                 }
                // else{ //fish fighting hard but should still lose a little strength
                  //   fish.setStrength(fish.getStrength()-5);
@@ -312,6 +334,7 @@ public class playFishing {
                 int strengthEffect = fish.fight(selectedRod.getChanceStat()); //10 is placeholder for rod stat
                 if (strengthEffect == 0){ //fish getting tired
                     fish.setStrength(fish.getStrength()-10);
+                    return true;
                 }
                // else{ //fish fighting hard but should still lose a little strength
                  //   fish.setStrength(fish.getStrength()-5);
@@ -320,6 +343,11 @@ public class playFishing {
             else if (fishAction == 1){ //steal bait method
                 int baitStolen = fish.stealBait(selectedRod.getChanceStat());
                 if (baitStolen == 1){
+                    Store.myBaits.remove(selectedBait);
+                    if (Store.myBaits.size() == 0){
+                        Store.myBaits.add(new Bait("Hook", 0, 0));
+                    }
+                    return false;
                     //remove bait and fish gets away
                 }
                // else{ //fish fighting hard but should still lose a little strength
@@ -330,6 +358,7 @@ public class playFishing {
             else if (fishAction == 2){
                 int escaped = fish.escape(selectedRod.getChanceStat());
                 if (escaped == 1){  //may need to change fishing variable in while loop to global to effect
+                    return false;
                     //fish got away
                 }
               //  else{ //fish fighting hard but should still lose a little strength
@@ -346,6 +375,7 @@ public class playFishing {
                 int strengthEffect = fish.fight(selectedRod.getChanceStat()); //10 is placeholder for rod stat
                 if (strengthEffect == 0){ //fish getting tired
                     fish.setStrength(fish.getStrength()-10);
+                    return true;
                 }
               //  else{ //fish fighting hard but should still lose a little strength
                 //    fish.setStrength(fish.getStrength()-5);
@@ -354,19 +384,26 @@ public class playFishing {
             else if (fishAction == 1){ //steal bait method
                 int baitStolen = fish.stealBait(selectedRod.getChanceStat());
                 if (baitStolen == 1){
-                    //remove bait and fish gets away
+                    Store.myBaits.remove(selectedBait);
+                    if (Store.myBaits.size() == 0){
+                        Store.myBaits.add(new Bait("Hook", 0, 0));
+                    }
+                    return false;
                 }
                // else{ //fish fighting hard but should still lose a little strength
                  //   fish.setStrength(fish.getStrength()-5);
                 //}
-
+            
             }
 
         }
+        return true;
+
     }
 
-    public void tugAction(String rarity, Object fishObject, Object rod){
+    public boolean tugAction(String rarity, Object fishObject, Object rod, Object bait){
         Rod selectedRod = (Rod) rod;
+        Bait selectedBait = (Bait) bait;
         if (rarity == "Rare"){
             Rare fish = (Rare) fishObject;
             Random gen = new Random();
@@ -375,38 +412,54 @@ public class playFishing {
                 int strengthEffect = fish.fight(selectedRod.getChanceStat()); //10 is placeholder for rod stat
                 if (strengthEffect == 0){ //fish getting tired
                     fish.setStrength(fish.getStrength()-10);
+                    return true;
                 }
                 else{ //fish fighting hard but should still lose a little strength
                     fish.setStrength(fish.getStrength()-5);
+                    return true;
                 }
             }
             else if (fishAction == 1){ //steal bait method
                 int baitStolen = fish.stealBait(selectedRod.getChanceStat());
                 if (baitStolen == 1){
+                    Store.myBaits.remove(selectedBait);
+                    if (Store.myBaits.size() == 0){
+                        Store.myBaits.add(new Bait("Hook", 0, 0));
+                    }
+                    return false;
                     //remove bait and fish gets away
                 }
                 else{ //fish fighting hard but should still lose a little strength
                     fish.setStrength(fish.getStrength()-5);
+                    return true;
                 }
 
             }
             else if (fishAction == 2){ //escape method
                 int escaped = fish.escape(selectedRod.getChanceStat());
                 if (escaped == 1){  //may need to change fishing variable in while loop to global to effect
+                    return false;
                     //fish got away
                 }
                 else{ //fish fighting hard but should still lose a little strength
                     fish.setStrength(fish.getStrength()-5);
+                    return true;
                 }
             }
 
             else if (fishAction == 3){ //break method
                 int rodBreak = fish.calculateBreak(selectedRod.getDurability()); //85 placeholder for durability
                 if (rodBreak == 1){
+                    Store.myRods.remove(selectedRod);
+                    if (Store.myRods.size() == 0){
+                        Store.myRods.add(new Rod("Starter Rod", 0, 50, 55));
+                    }
+                    return false;
                     //break rod and fish gets away
                 }
                 else{ //fish fighting hard but should still lose a little strength
                     fish.setStrength(fish.getStrength()-5);
+                    return true;
                 }
             }
         }
@@ -419,28 +472,38 @@ public class playFishing {
                 int strengthEffect = fish.fight(selectedRod.getChanceStat()); //10 is placeholder for rod stat
                 if (strengthEffect == 0){ //fish getting tired
                     fish.setStrength(fish.getStrength()-10);
+                    return true;
                 }
                 else{ //fish fighting hard but should still lose a little strength
                     fish.setStrength(fish.getStrength()-5);
+                    return true;
                 }
             }
             else if (fishAction == 1){ //steal bait method
                 int baitStolen = fish.stealBait(selectedRod.getChanceStat());
                 if (baitStolen == 1){
+                    Store.myBaits.remove(selectedBait);
+                    if (Store.myBaits.size() == 0){
+                        Store.myBaits.add(new Bait("Hook", 0, 0));
+                    }
+                    return false;
                     //remove bait and fish gets away
                 }
                 else{ //fish fighting hard but should still lose a little strength
                     fish.setStrength(fish.getStrength()-5);
+                    return true;
                 }
 
             }
             else if (fishAction == 2){
                 int escaped = fish.escape(selectedRod.getChanceStat());
                 if (escaped == 1){  //may need to change fishing variable in while loop to global to effect
+                    return false;
                     //fish got away
                 }
                 else{ //fish fighting hard but should still lose a little strength
                     fish.setStrength(fish.getStrength()-5);
+                    return true;
                 }
             }
         }
@@ -453,22 +516,32 @@ public class playFishing {
                 int strengthEffect = fish.fight(selectedRod.getChanceStat()); //10 is placeholder for rod stat
                 if (strengthEffect == 0){ //fish getting tired
                     fish.setStrength(fish.getStrength()-10);
+                    return true;
                 }
                 else{ //fish fighting hard but should still lose a little strength
                     fish.setStrength(fish.getStrength()-5);
+                    return true;
                 }
             }
             else if (fishAction == 1){ //steal bait method
                 int baitStolen = fish.stealBait(selectedRod.getChanceStat());
                 if (baitStolen == 1){
+                    Store.myBaits.remove(selectedBait);
+                    if (Store.myBaits.size() == 0){
+                        Store.myBaits.add(new Bait("Hook", 0, 0));
+                    }
+                    return false;
                     //remove bait and fish gets away
                 }
                 else{ //fish fighting hard but should still lose a little strength
                     fish.setStrength(fish.getStrength()-5);
+                    return true;
                 }
 
             }
 
         }
+        return true;
+        
     }
 }

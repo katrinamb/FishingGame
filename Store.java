@@ -37,7 +37,7 @@ public class Store extends Object{
         return myBaits.get(index);
     }
     //adds coins to the total coins of the user
-    void addCoins(int coins){
+    static void addCoins(int coins){
         Store.coins += coins;
     }
     //removes coins from the total coins of the user
@@ -158,7 +158,7 @@ public class Store extends Object{
             buyBait(baits[4]);
         }
         else{ //invalid choice
-            System.out.println("Invalid choice. Try again.");
+            //System.out.println("Invalid choice. Try again.");
         }
     }
 
@@ -183,7 +183,7 @@ public class Store extends Object{
                 Bait selectedBait = myBaits.get(choice);
                 System.out.println();
                 System.out.println(selectedBait.getName()+", good choice of bait!");
-                myBaits.remove(choice);
+                //myBaits.remove(choice);
                 return selectedBait;
             }
             else{
@@ -213,8 +213,8 @@ public class Store extends Object{
             if (choice <= myRods.size()){ //apply bait
                 Rod selectedRod = myRods.get(choice);
                 System.out.println();
-                System.out.println(selectedRod+" equiped.");
-                myRods.remove(choice);
+                System.out.println(selectedRod.getName()+" equipped.");
+                //myRods.remove(choice);
                 return selectedRod;
             }
             else{
