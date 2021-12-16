@@ -10,7 +10,7 @@ public class Uncommon extends Common{
     }
 
     //method that allows the fish to escape the line
-    public int escape(int chanceStat){
+    public int escape(){
         Random gen = new Random();
         int escapeChance = gen.nextInt(20);
         if (Math.abs(escapeChance-this.getSize())< 3){  //if the fish is big enough it escapes

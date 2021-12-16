@@ -52,7 +52,7 @@ public class Fish extends Object{
     }
 
     //method that allows the fish to fight against the user while it's on the line
-    public int fight(int chanceStat){
+    public int fight(){
         Random gen = new Random();
         int fightChance = gen.nextInt(100);
         if (Math.abs(fightChance - this.strength) < 10){     //the fish will not lose as much strength

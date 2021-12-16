@@ -249,7 +249,7 @@ public class playFishing {
             Random gen = new Random();
             int fishAction = gen.nextInt(4);
             if (fishAction == 0){ //fight method
-                int strengthEffect = fish.fight(selectedRod.getChanceStat()); 
+                int strengthEffect = fish.fight(); 
                 if (strengthEffect == 0){ //fish getting tired so decrease its strength
                     fish.setStrength(fish.getStrength()-5);
                     return true;
@@ -269,7 +269,7 @@ public class playFishing {
 
             }
             else if (fishAction == 2){ //escape method
-                int escaped = fish.escape(selectedRod.getChanceStat());
+                int escaped = fish.escape();
                 if (escaped == 1){   //the fish got away
                     return false;
                 }
@@ -294,7 +294,7 @@ public class playFishing {
             Random gen = new Random();
             int fishAction = gen.nextInt(3);
             if (fishAction == 0){ //fight method
-                int strengthEffect = fish.fight(selectedRod.getChanceStat()); 
+                int strengthEffect = fish.fight(); 
                 if (strengthEffect == 0){ //fish getting tired so decrease its strength
                     fish.setStrength(fish.getStrength()-10);
                     return true;
@@ -313,7 +313,7 @@ public class playFishing {
                
             }
             else if (fishAction == 2){  //escape method
-                int escaped = fish.escape(selectedRod.getChanceStat());
+                int escaped = fish.escape();
                 if (escaped == 1){  //the fish escaped
                     return false;
                 }
@@ -326,7 +326,7 @@ public class playFishing {
             Random gen = new Random();
             int fishAction = gen.nextInt(2);
             if (fishAction == 0){ //fight method
-                int strengthEffect = fish.fight(selectedRod.getChanceStat()); 
+                int strengthEffect = fish.fight(); 
                 if (strengthEffect == 0){ //fish getting tired so decrease its strength
                     fish.setStrength(fish.getStrength()-10);
                     return true;
@@ -359,7 +359,7 @@ public class playFishing {
             Random gen = new Random();
             int fishAction = gen.nextInt(4);
             if (fishAction == 0){ //fight method
-                int strengthEffect = fish.fight(selectedRod.getChanceStat()); 
+                int strengthEffect = fish.fight(); 
                 if (strengthEffect == 0){ //fish getting tired so decrease its strength
                     fish.setStrength(fish.getStrength()-10);
                     return true;
@@ -385,7 +385,7 @@ public class playFishing {
 
             }
             else if (fishAction == 2){ //escape method
-                int escaped = fish.escape(selectedRod.getChanceStat());
+                int escaped = fish.escape();
                 if (escaped == 1){   //the fish escaped
                     return false;
                 }
@@ -416,7 +416,7 @@ public class playFishing {
             Random gen = new Random();
             int fishAction = gen.nextInt(3);
             if (fishAction == 0){ //fight method
-                int strengthEffect = fish.fight(selectedRod.getChanceStat());
+                int strengthEffect = fish.fight();
                 if (strengthEffect == 0){ //fish getting tired so lose a lot of strength
                     fish.setStrength(fish.getStrength()-10);
                     return true;
@@ -443,7 +443,7 @@ public class playFishing {
 
             }
             else if (fishAction == 2){  //escape method
-                int escaped = fish.escape(selectedRod.getChanceStat());
+                int escaped = fish.escape();
                 if (escaped == 1){    //fish escaped
                     return false;
                 }
@@ -459,7 +459,7 @@ public class playFishing {
             Random gen = new Random();
             int fishAction = gen.nextInt(2);
             if (fishAction == 0){ //fight method
-                int strengthEffect = fish.fight(selectedRod.getChanceStat()); 
+                int strengthEffect = fish.fight(); 
                 if (strengthEffect == 0){ //fish getting tired so it loses a lot of strength
                     fish.setStrength(fish.getStrength()-10);
                     return true;
