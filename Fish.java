@@ -5,7 +5,7 @@ Outlines the attributes of Fish the user will catch and gives them a basic metho
 
 import java.lang.Math;
 import java.util.Random;
-public abstract class Fish extends Object{
+public class Fish extends Object{
     private String rarity;  //will be rare, common, and uncommon
     private String name;
     private double size;
@@ -67,7 +67,7 @@ public abstract class Fish extends Object{
     
     //basic toString to print out the fish' attributes after catching it
     public String toString() {
-        return "Fish name: " + name + " Rarity: " + rarity + " Size: " + size + " Value: "
+        return "\nFish name: " + name + "\nRarity: " + rarity + "\nSize: " + size + "\nValue: "
                 + value;
     }
 
