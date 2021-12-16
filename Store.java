@@ -157,8 +157,11 @@ public class Store extends Object{
         else if(choice==10){
             buyBait(baits[4]);
         }
-        else{ //invalid choice
-            //System.out.println("Invalid choice. Try again.");
+        else if(choice == 11){ //exit
+            
+        }
+        else{ //invalid choice 
+            System.out.println("Invalid choice. Try again.");
         }
     }
 
