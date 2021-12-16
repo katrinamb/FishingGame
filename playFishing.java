@@ -1,3 +1,10 @@
+/*
+Authors: Brady Fischer, Katrina Baha, Dillan Lopez
+Professor Nuzen
+Comp 305
+12/16/21
+Program to create a fishing game where the user can catch various types of fish and buy new rods and baits!
+*/
 import java.util.Scanner;
 import java.util.Random;
 // the runner program
@@ -13,92 +20,77 @@ public class playFishing {
     };
     // common fish list
     static Common commonFish[] = {
-        new Common("Common","Trout", 1.2, 50, 87),
-        new Common("Common","Bass", 1.4, 55, 85),
-        new Common("Common","Gold Fish", 0.2, 5, 30),
-        new Common("Common","Carp", 1.5, 50, 83),
-        new Common("Common","Salmon", 1.3, 40, 89),
-        new Common("Common","Tuna", 3, 100, 83)
+        new Common("Common","Trout", 1.2, 50, 68),
+        new Common("Common","Bass", 1.4, 55, 65),
+        new Common("Common","Gold Fish", 0.2, 5, 52),
+        new Common("Common","Carp", 1.5, 50, 67),
+        new Common("Common","Salmon", 1.3, 40, 71),
+        new Common("Common","Tuna", 3, 100, 72)
     };
     
     // uncommon fish list
     static Uncommon uncommonFish[] = {
         new Uncommon("Uncommon", "Clown Fish", 0.3, 350, 78),
-        new Uncommon("Uncommon", "Garibaldi", 1, 400, 72),
-        new Uncommon("Uncommon", "Koi Fish", 2.5, 200, 70),
-        new Uncommon("Uncommon", "Cherry Salmon", 1.5, 250, 79),
-        new Uncommon("Uncommon", "Puffer Fish", 2, 450, 74)
+        new Uncommon("Uncommon", "Garibaldi", 1, 400, 75),
+        new Uncommon("Uncommon", "Koi Fish", 2.5, 200, 73),
+        new Uncommon("Uncommon", "Cherry Salmon", 1.5, 250, 82),
+        new Uncommon("Uncommon", "Puffer Fish", 2, 450, 80)
     
     };
-    // rods list
-    static Rod[] rods = {
-        new Rod("Surf Rod", 100, 60, 85),
-        new Rod("Spinning Rod", 150, 70, 90),
-        new Rod("Fly Rod", 250, 75, 95),
-        new Rod("Ice Rod", 400, 80, 100),
-        new Rod("Telescopic Rod", 500, 90, 115)
-    };
-    // baits list
-    static Bait[] baits = {
-        new Bait("Wacky Worm", 50, 5),
-        new Bait("Honeycomb Spoon", 75, 10),
-        new Bait("Glittering Spinner", 100, 15),
-        new Bait("Suspending Crankbait", 125, 20),
-        new Bait("Rooster Tail", 150, 25)
-    };
+
     
     // main
     public static void main(String[] args){
         playFishing call = new playFishing();
-        Rod starter = new Rod("Starter Rod", 0, 50, 55);
-        Bait starterBait = new Bait("Hook", 0, 0);
+        Rod starter = new Rod("Starter Rod", 0, 50, 55);  //free rod the player can start with
+        Bait starterBait = new Bait("Hook", 0, 0);  //free bait the player can start with
         Store.myBaits.add(starterBait);
         Store.myRods.add(starter);
-        Rod selectedRod = starter;
+        Rod selectedRod = starter;  
         Bait selectedBait = starterBait;
 
         int choice;
       
         System.out.println("Hi, Welcome to the fishing game!");
         while(true){  
-            choice = menu();
+            choice = menu();    //get what the player wants to do
             if (choice == 1){ //go fishing
                 System.out.println();
                 System.out.println("You currently have " + selectedRod.getName() + " applied and " + selectedBait.getName() + " applied");
                 boolean casted = true;
-                while (casted){
+                while (casted){ 
                     choice = fishingMenu();
                     if (choice == 1){ //apply bait
                         System.out.println();
-                        selectedBait = Store.baitSelection();
-                        break;
+                        selectedBait = Store.baitSelection();  //get the player's bait selection
+                        
                     }
 
                     else if (choice == 2){ //change rod
                         System.out.println();
-                        selectedRod = Store.selectedRod();
-                        break;
+                        selectedRod = Store.selectedRod();  //get the player's rod selection
+                      
                     }
 
                     else if (choice == 3){ //cast
                         System.out.println();
                         System.out.println("Awesome, let's get that line out there!");
                         System.out.println("*casts line*");
-                        String rarity = rarity();
+                        String rarity = rarity();  //figure out a rarity of fish to be caught
                         
-                        Fish fish = pickFish(rarity); 
+                        Fish fish = pickFish(rarity);  //select which fish is to be caught
                         int ogStrength = fish.getStrength();     
                         boolean fishing = true;
                         
-                        while(fishing){
-                            int action = actionMenu();
+                        while(fishing){ //while the player is fighting the fish
+                            int action = actionMenu();  //give the player actions to fight the fish
                             fishing = call.resultAction(action, fish, rarity, selectedRod, selectedBait);
                             System.out.println("The fish's current strength: "+ fish.getStrength());
                         }
-                        fish.setStrength(ogStrength);
-                        selectedBait = starterBait;
+                        fish.setStrength(ogStrength);   //reset the fish' strength
+                        selectedBait = starterBait; 
                         selectedRod = starter;
-                        casted = false;
+                        casted = false; //stop fishing process
                             
                     }
                     else{ //invalid option
@@ -112,7 +104,7 @@ public class playFishing {
                 Boolean invalid = true;
                 while(invalid){
                     choice = Store.inventoryMenu();
-                    if(choice == 1){ //view inventory
+                    if(choice == 1){ //view inventory (prints everything the player owns)
                         System.out.println();
                         System.out.println("----Your Inventory----");
                         System.out.println("\nCoins: " + Store.getCoins());
@@ -126,7 +118,7 @@ public class playFishing {
                         }
                         invalid = false;
                     }
-                    else if(choice == 2){ //go to store
+                    else if(choice == 2){ //go to store and allow the player to buy new items
                         System.out.println();
                         Store.storeMenu();
                         Store.choice();
@@ -140,7 +132,7 @@ public class playFishing {
 
             }
 
-            else if (choice == 3){ //exit
+            else if (choice == 3){ //exit the game
                 break;
             }
 
@@ -219,7 +211,7 @@ public class playFishing {
         Rod rod = (Rod) selectedRod;
         Bait selectedBait = (Bait) bait;
         if (action == 1){ //reel in
-            if (rod.getChanceStat()+ selectedBait.getEffect()>fish.getStrength()){
+            if (rod.getChanceStat()+ selectedBait.getEffect()>fish.getStrength()){  //if the fish is weak enough th eplayer catches it
                 //catch
                 System.out.println("Great job, you just caught a real lunker!");
                 System.out.println(fish.toString());
@@ -227,9 +219,9 @@ public class playFishing {
                 return false;
             }
           
-            else{
+            else{  //the fish is still to strong to catch
                 System.out.println("Oh no reeling didn't work, the fish is still too strong!");
-                boolean fishing = reelAction(rarity, fish, selectedRod, selectedBait);
+                boolean fishing = reelAction(rarity, fish, selectedRod, selectedBait);  //the fish calls a method to fight back
                 return fishing;
             }       
         }
@@ -242,22 +234,23 @@ public class playFishing {
 
         else if (action ==3){ //leave it alone
             System.out.println("Interesting idea to leave it alone, let's see if that works!");
-            boolean fishing = reelAction(rarity, fish, selectedRod, selectedBait);
+            boolean fishing = reelAction(rarity, fish, selectedRod, selectedBait);  //the fish calls a method to fight back
             return fishing;
         }
         return true;
     }
 
+    //method that allows the fish to use one of its methods if the player tried to reel in or left it alone
     public boolean reelAction(String rarity, Object fishObject, Object rod, Object bait){
         Rod selectedRod = (Rod) rod;
         Bait selectedBait = (Bait) bait;
-        if (rarity == "Rare"){
+        if (rarity == "Rare"){  //all the methods a rare fish can call
             Rare fish = (Rare) fishObject;
             Random gen = new Random();
             int fishAction = gen.nextInt(4);
             if (fishAction == 0){ //fight method
                 int strengthEffect = fish.fight(selectedRod.getChanceStat()); 
-                if (strengthEffect == 0){ //fish getting tired
+                if (strengthEffect == 0){ //fish getting tired so decrease its strength
                     fish.setStrength(fish.getStrength()-5);
                     return true;
                 }
@@ -265,9 +258,9 @@ public class playFishing {
             }
             else if (fishAction == 1){ //steal bait method
                 int baitStolen = fish.stealBait(selectedRod.getChanceStat());
-                if (baitStolen == 1){
+                if (baitStolen == 1){  //bait is stolennso remove from inventory
                     Store.myBaits.remove(selectedBait);
-                    if (Store.myBaits.size() == 0){
+                    if (Store.myBaits.size() == 0){  //if the player has nothing left give them the free hook
                         Store.myBaits.add(new Bait("Hook", 0, 0));
                     }
                     return false;
@@ -277,19 +270,17 @@ public class playFishing {
             }
             else if (fishAction == 2){ //escape method
                 int escaped = fish.escape(selectedRod.getChanceStat());
-                if (escaped == 1){  
+                if (escaped == 1){   //the fish got away
                     return false;
-                    //fish got away
                 }
              
             }
 
             else if (fishAction == 3){ //break method
                 int rodBreak = fish.calculateBreak(selectedRod.getDurability()); 
-                if (rodBreak == 1){
-                    //break rod and fish gets away
+                if (rodBreak == 1){ //break rod and fish gets away
                     Store.myRods.remove(selectedRod);
-                    if (Store.myRods.size() == 0){
+                    if (Store.myRods.size() == 0){ //if the player has no rods left give them the free rod
                         Store.myRods.add(new Rod("Starter Rod", 0, 50, 55));
                     }
                     return false;
@@ -298,13 +289,13 @@ public class playFishing {
             }
         }
 
-        else if (rarity == "Uncommon"){
+        else if (rarity == "Uncommon"){ //all the methods an Uncommon fish can call
             Uncommon fish = (Uncommon) fishObject;
             Random gen = new Random();
             int fishAction = gen.nextInt(3);
             if (fishAction == 0){ //fight method
                 int strengthEffect = fish.fight(selectedRod.getChanceStat()); 
-                if (strengthEffect == 0){ //fish getting tired
+                if (strengthEffect == 0){ //fish getting tired so decrease its strength
                     fish.setStrength(fish.getStrength()-10);
                     return true;
                 }
@@ -312,34 +303,31 @@ public class playFishing {
             }
             else if (fishAction == 1){ //steal bait method
                 int baitStolen = fish.stealBait(selectedRod.getChanceStat());
-                if (baitStolen == 1){
+                if (baitStolen == 1){ //bait is stolen so remove it from inventory
                     Store.myBaits.remove(selectedBait);
-                    if (Store.myBaits.size() == 0){
+                    if (Store.myBaits.size() == 0){  //if the player has no baits left give them a free one
                         Store.myBaits.add(new Bait("Hook", 0, 0));
                     }
                     return false;
-                    //remove bait and fish gets away
                 }
                
-
             }
-            else if (fishAction == 2){
+            else if (fishAction == 2){  //escape method
                 int escaped = fish.escape(selectedRod.getChanceStat());
-                if (escaped == 1){  //may need to change fishing variable in while loop to global to effect
+                if (escaped == 1){  //the fish escaped
                     return false;
-                    //fish got away
                 }
               
             }
         }
 
-        else if (rarity == "Common"){
+        else if (rarity == "Common"){ //all the methods a Common fish can call
             Common fish = (Common) fishObject;
             Random gen = new Random();
             int fishAction = gen.nextInt(2);
             if (fishAction == 0){ //fight method
                 int strengthEffect = fish.fight(selectedRod.getChanceStat()); 
-                if (strengthEffect == 0){ //fish getting tired
+                if (strengthEffect == 0){ //fish getting tired so decrease its strength
                     fish.setStrength(fish.getStrength()-10);
                     return true;
                 }
@@ -347,9 +335,9 @@ public class playFishing {
             }
             else if (fishAction == 1){ //steal bait method
                 int baitStolen = fish.stealBait(selectedRod.getChanceStat());
-                if (baitStolen == 1){
+                if (baitStolen == 1){  //bait is stolen so remove it from inventory
                     Store.myBaits.remove(selectedBait);
-                    if (Store.myBaits.size() == 0){
+                    if (Store.myBaits.size() == 0){  //if the player has no baits left give them a free one
                         Store.myBaits.add(new Bait("Hook", 0, 0));
                     }
                     return false;
@@ -362,16 +350,17 @@ public class playFishing {
 
     }
 
+    //method for if the player tugs on the line to tire the fish out
     public boolean tugAction(String rarity, Object fishObject, Object rod, Object bait){
         Rod selectedRod = (Rod) rod;
         Bait selectedBait = (Bait) bait;
-        if (rarity == "Rare"){
+        if (rarity == "Rare"){  //all the methods a rare fish can call
             Rare fish = (Rare) fishObject;
             Random gen = new Random();
             int fishAction = gen.nextInt(4);
             if (fishAction == 0){ //fight method
                 int strengthEffect = fish.fight(selectedRod.getChanceStat()); 
-                if (strengthEffect == 0){ //fish getting tired
+                if (strengthEffect == 0){ //fish getting tired so decrease its strength
                     fish.setStrength(fish.getStrength()-10);
                     return true;
                 }
@@ -382,15 +371,14 @@ public class playFishing {
             }
             else if (fishAction == 1){ //steal bait method
                 int baitStolen = fish.stealBait(selectedRod.getChanceStat());
-                if (baitStolen == 1){
+                if (baitStolen == 1){  //bait is stolen so remove it from inventory
                     Store.myBaits.remove(selectedBait);
-                    if (Store.myBaits.size() == 0){
+                    if (Store.myBaits.size() == 0){  //give player free bait if they have none left
                         Store.myBaits.add(new Bait("Hook", 0, 0));
                     }
                     return false;
-                    //remove bait and fish gets away
                 }
-                else{ //fish fighting hard but should still lose a little strength
+                else{ //fish couldn't steal bait so lose some strength
                     fish.setStrength(fish.getStrength()-5);
                     return true;
                 }
@@ -398,11 +386,10 @@ public class playFishing {
             }
             else if (fishAction == 2){ //escape method
                 int escaped = fish.escape(selectedRod.getChanceStat());
-                if (escaped == 1){  
+                if (escaped == 1){   //the fish escaped
                     return false;
-                    //fish got away
                 }
-                else{ //fish fighting hard but should still lose a little strength
+                else{ //fish couldn't escape so lose a little strength
                     fish.setStrength(fish.getStrength()-5);
                     return true;
                 }
@@ -410,28 +397,27 @@ public class playFishing {
 
             else if (fishAction == 3){ //break method
                 int rodBreak = fish.calculateBreak(selectedRod.getDurability()); 
-                if (rodBreak == 1){
+                if (rodBreak == 1){  //the player's rod breaks so remove it from inventory
                     Store.myRods.remove(selectedRod);
-                    if (Store.myRods.size() == 0){
+                    if (Store.myRods.size() == 0){  //if the player has no rods left give them a free one
                         Store.myRods.add(new Rod("Starter Rod", 0, 50, 55));
                     }
                     return false;
-                    //break rod and fish gets away
                 }
-                else{ //fish fighting hard but should still lose a little strength
+                else{ //fish couldn't break rod so it loses a little strength
                     fish.setStrength(fish.getStrength()-5);
                     return true;
                 }
             }
         }
 
-        else if (rarity == "Uncommon"){
+        else if (rarity == "Uncommon"){  //all the methods an uncommon fish can call
             Uncommon fish = (Uncommon) fishObject;
             Random gen = new Random();
             int fishAction = gen.nextInt(3);
             if (fishAction == 0){ //fight method
                 int strengthEffect = fish.fight(selectedRod.getChanceStat());
-                if (strengthEffect == 0){ //fish getting tired
+                if (strengthEffect == 0){ //fish getting tired so lose a lot of strength
                     fish.setStrength(fish.getStrength()-10);
                     return true;
                 }
@@ -442,40 +428,39 @@ public class playFishing {
             }
             else if (fishAction == 1){ //steal bait method
                 int baitStolen = fish.stealBait(selectedRod.getChanceStat());
-                if (baitStolen == 1){
+                if (baitStolen == 1){  //bait is stolen so remove it from inventory
                     Store.myBaits.remove(selectedBait);
-                    if (Store.myBaits.size() == 0){
+                    if (Store.myBaits.size() == 0){  //give the player a free bait if they don't have any left
                         Store.myBaits.add(new Bait("Hook", 0, 0));
                     }
                     return false;
                     //remove bait and fish gets away
                 }
-                else{ //fish fighting hard but should still lose a little strength
+                else{ //fish couldn't steal bait so it should lose a little strength
                     fish.setStrength(fish.getStrength()-5);
                     return true;
                 }
 
             }
-            else if (fishAction == 2){
+            else if (fishAction == 2){  //escape method
                 int escaped = fish.escape(selectedRod.getChanceStat());
-                if (escaped == 1){  
+                if (escaped == 1){    //fish escaped
                     return false;
-                    //fish got away
                 }
-                else{ //fish fighting hard but should still lose a little strength
+                else{ //fish couldn't escape so it should lose a little strength
                     fish.setStrength(fish.getStrength()-5);
                     return true;
                 }
             }
         }
 
-        else if (rarity == "Common"){
+        else if (rarity == "Common"){  //all the methods a common fish can call
             Common fish = (Common) fishObject;
             Random gen = new Random();
             int fishAction = gen.nextInt(2);
             if (fishAction == 0){ //fight method
                 int strengthEffect = fish.fight(selectedRod.getChanceStat()); 
-                if (strengthEffect == 0){ //fish getting tired
+                if (strengthEffect == 0){ //fish getting tired so it loses a lot of strength
                     fish.setStrength(fish.getStrength()-10);
                     return true;
                 }
@@ -486,15 +471,15 @@ public class playFishing {
             }
             else if (fishAction == 1){ //steal bait method
                 int baitStolen = fish.stealBait(selectedRod.getChanceStat());
-                if (baitStolen == 1){
+                if (baitStolen == 1){  //bait is stolen so remove it from inventory
                     Store.myBaits.remove(selectedBait);
-                    if (Store.myBaits.size() == 0){
+                    if (Store.myBaits.size() == 0){  //give the player  free bait if they don't have any left
                         Store.myBaits.add(new Bait("Hook", 0, 0));
                     }
                     return false;
                     //remove bait and fish gets away
                 }
-                else{ //fish fighting hard but should still lose a little strength
+                else{ //fish couldn't steal bait so it should lose a little strength
                     fish.setStrength(fish.getStrength()-5);
                     return true;
                 }

@@ -14,19 +14,19 @@ public class Store extends Object{
     
     // rods available to buy
     public static Rod[] rods = {
-        new Rod("Surf Rod", 100, 60, 85),
-        new Rod("Spinning Rod", 150, 70, 90),
-        new Rod("Fly Rod", 250, 75, 95),
-        new Rod("Ice Rod", 400, 80, 100),
-        new Rod("Telescopic Rod", 500, 90, 115)
+        new Rod("Surf Rod", 100, 60, 65),
+        new Rod("Spinning Rod", 150, 70, 70),
+        new Rod("Fly Rod", 250, 75, 60),
+        new Rod("Ice Rod", 400, 80, 80),
+        new Rod("Telescopic Rod", 500, 90, 75)
     };
     // baits available to buy
     public static Bait[] baits = {
-        new Bait("Wacky Worm", 50, 10),
-        new Bait("Honeycomb Spoon", 75, 20),
-        new Bait("Glittering Spinner", 100, 35),
-        new Bait("Suspending Crankbait", 125, 45),
-        new Bait("Rooster Tail", 150, 60)
+        new Bait("Wacky Worm", 50, 2),
+        new Bait("Honeycomb Spoon", 75, 3),
+        new Bait("Glittering Spinner", 100, 4),
+        new Bait("Suspending Crankbait", 125, 6),
+        new Bait("Rooster Tail", 150, 7)
     };
     
     //getters and setters
