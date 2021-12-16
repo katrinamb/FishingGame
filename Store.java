@@ -1,13 +1,18 @@
+/*
+File to house all the methods and objects involved with viewing 
+the player's inventory and buying new items
+*/
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Store extends Object{
     static Scanner scan = new Scanner(System.in);
-    private static int coins = 150;
-    //public String[] rods = new String[]{"Surf Rod", "Spinning Rod", "Fly Rod", "Ice Rod", "Telescopic Rod"};
-    //public String[] baits = new String[]{"Wacky Worm","Honeycomb Spoon","Glittering Spinner","Suspending Crankbait","Rooster Tail"};
+    private static int coins = 150;  //base amount of coins to start with
+    
+    //will house items the player has bought
     public static ArrayList<Rod> myRods = new ArrayList<Rod>();
     public static ArrayList<Bait> myBaits = new ArrayList<Bait>();
-    // rods list
+    
+    // rods available to buy
     public static Rod[] rods = {
         new Rod("Surf Rod", 100, 60, 85),
         new Rod("Spinning Rod", 150, 70, 90),
@@ -15,7 +20,7 @@ public class Store extends Object{
         new Rod("Ice Rod", 400, 80, 100),
         new Rod("Telescopic Rod", 500, 90, 115)
     };
-    // baits list
+    // baits available to buy
     public static Bait[] baits = {
         new Bait("Wacky Worm", 50, 10),
         new Bait("Honeycomb Spoon", 75, 20),
@@ -24,6 +29,7 @@ public class Store extends Object{
         new Bait("Rooster Tail", 150, 60)
     };
     
+    //getters and setters
     static int getCoins(){
         return coins;
     }
@@ -48,14 +54,14 @@ public class Store extends Object{
     static void buyRod(Rod rod){
         if(getCoins() >= rod.getPrice()){
             for (int i = 0; i < rods.length; i++){
-                if(rods[i].getName() == rod.getName()){
+                if(rods[i].getName() == rod.getName()){  //finds the rod the player wants to buy
                     System.out.println("Nice choice! Added to your inventory.");
-                    myRods.add(rods[i]);
+                    myRods.add(rods[i]);  //adds rod to inventory
                 }
             }
             subCoins(rod.getPrice());
         }
-        else{
+        else{  //doesn't let the player buy if they don't have enough money
             System.out.println("You do not have enough coins to purchase this item.");
         } 
     }
@@ -63,14 +69,14 @@ public class Store extends Object{
     static void buyBait(Bait bait){
         if(getCoins() >= bait.getPrice()){
             for (int i = 0; i < baits.length; i++){
-                if(baits[i].getName() == bait.getName()){
+                if(baits[i].getName() == bait.getName()){  //finds the bait the player wants to buy
                     System.out.println("Nice choice! Added to your inventory.");
-                    myBaits.add(baits[i]);
+                    myBaits.add(baits[i]);  //adds bait to inventory
                 }
             }
             subCoins(bait.getPrice());
         }
-        else{
+        else{  //doesn't let the player buy bait if they don't have the money
             System.out.println("You do not have enough coins to purchase this item.");
         }    
     }
@@ -94,9 +100,9 @@ public class Store extends Object{
     //the store menu
     public static void storeMenu(){
         System.out.println("\nWelcome to the Store!");
-        Store.rodToString();
+        Store.rodToString();  //all the rods you can buy
         System.out.println();
-        Store.baitToString();
+        Store.baitToString();  //all the baits you can buy
     }
 
     // the invetory menu 
@@ -123,7 +129,7 @@ public class Store extends Object{
         System.out.println("11. Exit");
     }
 
-    // get the users choice to purchase items
+    // get the users choice to purchase items and then buys that item
     public static void choice(){
         buyMenu();
         int choice = scan.nextInt();
@@ -165,28 +171,28 @@ public class Store extends Object{
         }
     }
 
-    //get users input to return the bait the user selects, it also removes the bait from myBait
+    //get users input to return the bait the user selects in main
     public static Bait baitSelection(){
         while (true){  
-            if(myBaits.size() != 0){
+            if(myBaits.size() != 0){  //makes sure their is bait for the user to select
                 System.out.println();
                 System.out.println("Player 1's Bait: ");
-                for(int i = 0; i < myBaits.size(); i++){
+                for(int i = 0; i < myBaits.size(); i++){  //prints all the baits the user can choose from
                     System.out.println(myBaits.get(i).getName() + " [Select: "+ i + "]");
                 }
             }
-            else{
+            else{  //if they don't have any baits
                 System.out.println();
                 System.out.println("No bait available to equip.");
             }
             System.out.println();
             System.out.println("Select an option:");
             int choice = scan.nextInt();
-            if (choice <= myBaits.size()){ //apply bait
+            if (choice <= myBaits.size()){ //lets the user select the bait they want to use and applies it
                 Bait selectedBait = myBaits.get(choice);
                 System.out.println();
                 System.out.println(selectedBait.getName()+", good choice of bait!");
-                //myBaits.remove(choice);
+              
                 return selectedBait;
             }
             else{
@@ -196,28 +202,28 @@ public class Store extends Object{
         }
     } 
 
-    //get users input to return the bait the user selects, it also removes the bait from myBait
+    //get users input to return the rod the user selects in main
     public static Rod selectedRod(){
         while (true){  
-            if(myRods.size() != 0){
+            if(myRods.size() != 0){  //makes sure the player has rods to choose from
                 System.out.println();
                 System.out.println("Player 1's Rods: ");
-                for(int i = 0; i < myRods.size(); i++){
+                for(int i = 0; i < myRods.size(); i++){  //loops through all the player's rods
                     System.out.println(myRods.get(i).getName() + " [Select: "+ i + "]");
                 }
             }
-            else{
+            else{  //if they don't have any rods
                 System.out.println();
                 System.out.println("No Rod available to equip.");
             }
             System.out.println();
             System.out.println("Select an option:");
             int choice = scan.nextInt();
-            if (choice <= myRods.size()){ //apply bait
+            if (choice <= myRods.size()){ //lets the user select the rod they want and applies it
                 Rod selectedRod = myRods.get(choice);
                 System.out.println();
                 System.out.println(selectedRod.getName()+" equipped.");
-                //myRods.remove(choice);
+         
                 return selectedRod;
             }
             else{

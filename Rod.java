@@ -1,8 +1,13 @@
+/*
+File to create objects of rod class that can help the user catch bigger fish
+the user can apply these objects when going fishing and can buy them from the store
+*/
+
 public class Rod extends Object{
     private String name;
-    private int price;
-    private int durability;
-    private int chanceStat;
+    private int price;  //how much it costs
+    private int durability;   //helps the rod in not breaking against rare fish
+    private int chanceStat;  //helps the user catch fish easier and quicker
 
     public Rod(String name,int price, int durability,int chanceStat) {
         this.name = name;
@@ -11,6 +16,7 @@ public class Rod extends Object{
         this.chanceStat = chanceStat;
     }
     
+    //getters and setters
     public String getName() {
         return name;
     }

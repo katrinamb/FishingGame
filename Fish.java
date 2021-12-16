@@ -1,11 +1,16 @@
+/*
+Base class file for Fish objects
+Outlines the attributes of Fish the user will catch and gives them a basic method
+*/
+
 import java.lang.Math;
 import java.util.Random;
 public abstract class Fish extends Object{
-    private String rarity;
+    private String rarity;  //will be rare, common, and uncommon
     private String name;
     private double size;
-    private int value;
-    public int strength;
+    private int value;  //how many coins it gives the user for catching
+    public int strength;   //factors into how hard it is to catch
     public Fish(String rarity, String name, double size, int value, int strength) {
         this.rarity = rarity;
         this.name = name;
@@ -13,6 +18,8 @@ public abstract class Fish extends Object{
         this.value = value;
         this.strength = strength;
     }
+
+    //getters and setters
     public String getRarity() {
         return rarity;
     }
@@ -44,19 +51,21 @@ public abstract class Fish extends Object{
         this.strength = strength;
     }
 
+    //method that allows the fish to fight against the user while it's on the line
     public int fight(int chanceStat){
         Random gen = new Random();
         int fightChance = gen.nextInt(100);
-        if (Math.abs(fightChance - this.strength) < 10){
+        if (Math.abs(fightChance - this.strength) < 10){     //the fish will not lose as much strength
             System.out.println("The fish is fighting harder and not slowing down!");
             return 1;  //dont decrease fish strength
         } 
-        else{
+        else{   //the fish will lose strength because it's tiring its self out
             System.out.println("The fish is fighting hard but losing steam");
             return 0; //decrease fish strength
         }
     }
     
+    //basic toString to print out the fish' attributes after catching it
     public String toString() {
         return "Fish name: " + name + " Rarity: " + rarity + " Size: " + size + " Value: "
                 + value;
