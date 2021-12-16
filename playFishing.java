@@ -88,14 +88,13 @@ public class playFishing {
                         String rarity = rarity();
                         //might have to do ifs and else statements when selecting a fish
                         Fish fish = pickFish(rarity); 
-                        int ogStrength = fish.getStrength(); 
-                        setOgStrength(ogStrength);        
+                        int ogStrength = fish.getStrength();     
                         boolean fishing = true;
                         
                         while(fishing){
                             int action = actionMenu();
                             fishing = call.resultAction(action, fish, rarity, selectedRod, selectedBait);
-                            System.out.println("The fish's current strength:"+ fish.getStrength());
+                            System.out.println("The fish's current strength: "+ fish.getStrength());
                         }
                         fish.setStrength(ogStrength);
                         selectedBait = starterBait;
@@ -117,7 +116,8 @@ public class playFishing {
                     if(choice == 1){ //view inventory
                         System.out.println();
                         System.out.println("----Your Inventory----");
-                        System.out.println("Coins: " + Store.getCoins() + "\nRods: ");
+                        System.out.println("\nCoins: " + Store.getCoins());
+                        System.out.println("\nRods: ");
                         for (int i = 0; i < Store.myRods.size(); i++){
                             System.out.println(Store.myRods.get(i).getName());
                         }
@@ -217,10 +217,6 @@ public class playFishing {
         System.out.println("2. Tug On Line");
         System.out.println("3. Leave It Alone");
         return scan.nextInt();
-    }
-    static int ogFishStrength;
-    public static void setOgStrength(int ogStrength){
-        ogFishStrength = ogStrength;
     }
 
     //computes the result after the action the user chooses to do
